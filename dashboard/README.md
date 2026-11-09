@@ -3,6 +3,8 @@
 An interactive visualization layer over the completed study: every chart reads the result tables,
 nothing is typed in by hand. Built with Streamlit and Plotly.
 
+**Live at https://forgetcheck.streamlit.app** (see [Hosting](#hosting)).
+
 ## Run it
 
 From the repository root, with the project venv:
@@ -65,8 +67,8 @@ The landing page says which of these are still missing.
 
 ## Hosting
 
-The dashboard is also hosted on **Streamlit Community Cloud**, from this repository's `main`
-branch, so it can be opened without anyone's laptop. Every push to `main` redeploys it, including a
+The dashboard is also hosted at https://forgetcheck.streamlit.app, on **Streamlit Community
+Cloud**, from this repository's `main` branch, so it can be opened without anyone's laptop. Every push to `main` redeploys it, including a
 new data snapshot.
 
 - **Dependencies.** Community Cloud reads `dashboard/requirements.txt`, next to the entrypoint,

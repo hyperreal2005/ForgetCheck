@@ -50,7 +50,7 @@ complete. [`docs/RESULTS.md`](docs/RESULTS.md) gives every result with the reaso
 | If you want to… | Read |
 |---|---|
 | See the results and the reasoning behind every number | [`docs/RESULTS.md`](docs/RESULTS.md) |
-| Explore the results interactively, or present them | [`dashboard/`](dashboard/README.md) |
+| Explore the results interactively, or present them | [forgetcheck.streamlit.app](https://forgetcheck.streamlit.app), or run [`dashboard/`](dashboard/README.md) yourself |
 | Know how the build went: decisions, defects and corrections | [`docs/STATUS.md`](docs/STATUS.md) |
 | Build or change something | [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md) — §4 is **binding** |
 | Understand why the design is what it is | [`docs/FORGETCHECK_REVIEW.md`](docs/FORGETCHECK_REVIEW.md), with the evidence in [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
@@ -133,8 +133,8 @@ A guided tour of the findings for presentations, a report card for any of the 24
 models, audit validity, agreement between audits, method comparisons, relearning curves, the forget
 sets, and a calibration lab for what-ifs (band size, band rule, damage threshold, minimum effect).
 It runs from its own committed snapshot in `dashboard/data/`, so it needs no results bundle. It is
-also hosted on Streamlit Community Cloud, kept awake by a scheduled GitHub Actions job. See
-[`dashboard/README.md`](dashboard/README.md).
+also live at **https://forgetcheck.streamlit.app**, hosted on Streamlit Community Cloud and kept
+awake by a scheduled GitHub Actions job. See [`dashboard/README.md`](dashboard/README.md).
 
 ## Layout
 

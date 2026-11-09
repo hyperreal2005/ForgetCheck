@@ -2898,6 +2898,15 @@ headless Chromium every 4 h and clicks the wake-up button if needed; a failed ru
 Tested locally against the live app, a mock of the sleeping page, and a page that never loads.
 The workflow is off until the repository variable `DASHBOARD_URL` is set.
 
+**9 Nov: live** at https://forgetcheck.streamlit.app. The manual keep-awake run passed, and the
+wake script loads the real app through Community Cloud's iframe (10 s, awake). But no scheduled run
+fired in the first nine hours (08:17, 12:17 and 16:17 UTC all missing), with the workflow active,
+the repository public and not a fork, and the file on `main` unchanged. A GitHub Actions incident
+(10:00–11:50) covers at most the first. The workflow was disabled and re-enabled at 16:37 UTC, so
+that GitHub registers the schedule again; to check: the 20:17 UTC run appears. `.devcontainer/`
+(added from Streamlit's setup page, for Codespaces) removed: not used, and it installed too little
+to run the dashboard.
+
 ## Outstanding from Stage 5 — one real item (14 Sep 2026)
 
 Checkpoints and records are complete and consistent. One thing is **not** settled, and it affects
