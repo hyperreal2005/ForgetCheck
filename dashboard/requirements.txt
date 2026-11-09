@@ -1,0 +1,11 @@
+# What the hosted dashboard needs, and nothing else. Streamlit Community Cloud reads the
+# dependency file next to the entrypoint before the repository root, so this keeps it from
+# installing the whole pipeline (PyTorch included) from pyproject.toml. Pinned to the versions
+# the dashboard was tested with.
+streamlit==1.66.1
+plotly==7.1.0
+pandas==3.0.5
+pyarrow==25.0.1
+scipy==1.18.1
+numpy==2.5.2
+pillow==12.3.0

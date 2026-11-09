@@ -1,0 +1,49 @@
+name: keep dashboard awake
+
+# Streamlit Community Cloud puts the dashboard to sleep after 12 hours without a viewer, and the
+# next visitor then waits about a minute for it to start. This opens it in a headless browser every
+# four hours, which counts as a viewer, and wakes it if it has gone to sleep anyway. A failed run
+# means the dashboard did not load; GitHub emails whoever last changed this schedule.
+#
+# Off until the repository variable DASHBOARD_URL is set (Settings -> Secrets and variables ->
+# Actions -> Variables), e.g. https://forgetcheck.streamlit.app.
+#
+# GitHub disables scheduled workflows in a public repository after 60 days without a commit. It
+# emails first; the Actions tab turns it back on in one click.
+
+on:
+  schedule:
+    # Every four hours, at 17 minutes past: GitHub delays, and under load drops, runs queued at
+    # the top of the hour. Four hours leaves room for a dropped run inside the 12-hour window.
+    - cron: "17 */4 * * *"
+  workflow_dispatch:
+
+jobs:
+  wake:
+    if: vars.DASHBOARD_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install a headless browser
+        run: |
+          pip install playwright==1.64.1
+          python -m playwright install --with-deps chromium
+
+      - name: Open the dashboard
+        env:
+          DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+        run: python .github/scripts/wake_dashboard.py "$DASHBOARD_URL"
+
+      - name: Keep a screenshot of what loaded instead
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wake-failure
+          path: wake_failure.png
+          if-no-files-found: ignore

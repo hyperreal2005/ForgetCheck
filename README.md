@@ -132,7 +132,8 @@ streamlit run dashboard/app.py
 A guided tour of the findings for presentations, a report card for any of the 240 unlearned
 models, audit validity, agreement between audits, method comparisons, relearning curves, the forget
 sets, and a calibration lab for what-ifs (band size, band rule, damage threshold, minimum effect).
-It runs from its own committed snapshot in `dashboard/data/`, so it needs no results bundle. See
+It runs from its own committed snapshot in `dashboard/data/`, so it needs no results bundle. It is
+also hosted on Streamlit Community Cloud, kept awake by a scheduled GitHub Actions job. See
 [`dashboard/README.md`](dashboard/README.md).
 
 ## Layout

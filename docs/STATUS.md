@@ -2890,6 +2890,14 @@ and one random-init) reproduce the Stage 6 AUCs to a median difference of 0.0000
 ≤ 0.001; max 0.021, NegGrad). The paper's abstract, contributions and conclusion now use the
 precise sentence above (docx edited in place; `build/paper_content.py` matches).
 
+**8 Nov: hosting.** The dashboard goes on Streamlit Community Cloud (free; redeploys on every push
+to `main`). `dashboard/requirements.txt` limits the install to its seven packages; every page was
+rendered from a fresh venv holding only those. Community Cloud sleeps an app after 12 h without a
+viewer, and a plain ping does not count as one, so `.github/workflows/keep-awake.yml` opens it in
+headless Chromium every 4 h and clicks the wake-up button if needed; a failed run is a down alert.
+Tested locally against the live app, a mock of the sleeping page, and a page that never loads.
+The workflow is off until the repository variable `DASHBOARD_URL` is set.
+
 ## Outstanding from Stage 5 — one real item (14 Sep 2026)
 
 Checkpoints and records are complete and consistent. One thing is **not** settled, and it affects

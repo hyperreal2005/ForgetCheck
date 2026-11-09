@@ -62,3 +62,27 @@ Optional inputs are picked up automatically when present:
 - `data/cifar-10-batches-py`: the gallery thumbnails.
 
 The landing page says which of these are still missing.
+
+## Hosting
+
+The dashboard is also hosted on **Streamlit Community Cloud**, from this repository's `main`
+branch, so it can be opened without anyone's laptop. Every push to `main` redeploys it, including a
+new data snapshot.
+
+- **Dependencies.** Community Cloud reads `dashboard/requirements.txt`, next to the entrypoint,
+  before the root `pyproject.toml`. So it installs only the seven packages the app needs, not the
+  pipeline and PyTorch. Keep that file in step with any new import in `dashboard/`.
+- **Sleep.** Community Cloud puts an app to sleep after 12 hours without a viewer, and the next
+  visitor waits about a minute for it. `.github/workflows/keep-awake.yml` prevents this. Every four
+  hours it opens the dashboard in a headless browser, which counts as a viewer, and clicks the
+  wake-up button if it has gone to sleep anyway. A plain HTTP ping would not do: it reaches
+  Streamlit's own front page, not the app.
+- **Down alerts.** If the dashboard does not load within seven minutes, the workflow run fails and
+  keeps a screenshot of what loaded instead. GitHub emails whoever pushed the workflow, or last
+  changed its schedule.
+- **Settings.** The workflow reads the app's address from the repository variable `DASHBOARD_URL`
+  and does nothing until it is set. GitHub disables scheduled workflows in a public repository
+  after 60 days without a commit; it emails first, and the Actions tab turns it back on.
+
+The app must stay **public**: a private app needs a sign-in, which the headless browser cannot do.
+Everything it shows is already in this public repository.
