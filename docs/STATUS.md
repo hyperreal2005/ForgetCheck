@@ -89,7 +89,7 @@ ties cannot reorder across numpy versions. Stratum definitions match RUM's exact
 
 Stratum overlap 0. Median 0.1328; 26.6% of scores below 0.01; 24.9% above 0.5.
 
-Two things worth carrying into the paper. **The negative control is exact, not approximate** —
+Two things worth carrying into the results. **The negative control is exact, not approximate** —
 the bottom 3000 all have memorization of precisely 0.0, so theory predicts M0 ≡ M_r there rather
 than merely M0 ≈ M_r. And the fat tail above 0.5 (24.9%) is what keeps medium-mem from colliding
 with high-mem under RUM's "nearest to 0.5" definition; on a thinner-tailed distribution it would
@@ -211,7 +211,7 @@ On low-memorization data the oracle is right anyway, so M₀ ≈ M_r and there i
 the negative control behaving exactly as designed. On high-memorization data it drops to 56%, so
 M₀ and M_r genuinely differ and the audits have something to disagree about.
 
-Two things to carry into the paper. Canary M₀ scores ~0.929 test vs ~0.935 for clean M₀ — the
+Two things to carry into the results. Canary M₀ scores ~0.929 test vs ~0.935 for clean M₀ — the
 500 mislabeled canaries cost about 0.5 pp of generalisation, as expected. And 56% is far above
 what the memorization scores alone would predict (~3%), because Feldman–Zhang estimate from
 models trained on 70% subsets while our oracle sees 94% of the data; state this explicitly or a
@@ -344,7 +344,7 @@ examples at batch 256 that is **twelve** optimizer steps at a thousandth learnin
 
 Why it mattered more than a bad number: NegGrad is in the method set as a *labelled control*, the
 clean demonstration that "looks forgotten" can mean "damaged" — the failure Audit Layer 1 exists
-to catch. A no-op control does not merely score badly, it removes that contrast from the paper
+to catch. A no-op control does not merely score badly, it removes that contrast from the study
 and invites the reader to conclude gradient ascent is harmless.
 
 Raised to `epochs=5, lr=0.01`. The calibration is taken from the pilot's own arithmetic rather
@@ -431,7 +431,7 @@ oracle gap:
 The naive metric ranks the destroyed model **first** and the oracle-gap metric ranks it **last**.
 This is the empirical justification for `forget_acc` being registered `closer_to_oracle` rather
 than `lower_better` in `configs/metrics.yaml` — previously a design argument, now a measurement.
-It belongs in the paper.
+It belongs in the results.
 
 ### Decision — `neggrad` stays at full collapse
 
@@ -476,7 +476,7 @@ noise, so the comparison stays fair.
 But 0.90 pp is **larger than the 0.40 pp Stage 3 seed-SD tolerance**, so it is not negligible:
 
 - The 5-seed spread on each (method, condition) is seed variance **plus** hardware
-  nondeterminism. The paper must describe it that way; calling it "seed variance" would be wrong.
+  nondeterminism. The results must describe it that way; calling it "seed variance" would be wrong.
 - Method gaps here are 10–40 pp, so nothing about the ranking is at risk. Do not re-tune anything
   on the strength of a sub-1 pp difference.
 - An individual run cannot be reproduced exactly from the config alone. The stored checkpoints
@@ -1072,7 +1072,7 @@ forget-acc sd at mem-high), so `relearn_norm` is **defined where forgetting is d
 mem-high (oracle 0.56), canary (oracle ~0), probably mem-med (0.91) — and **undefined where it is
 not** (rand-*, mem-low), with the anchor gap written to `notes`. The raw `relearn_auc` is always
 recorded. This generalises: *every* oracle-normalised metric is ill-conditioned where M₀ ≈ M_r,
-which is the plan's `low_discriminability` flag; reversibility just makes it vivid. The paper
+which is the plan's `low_discriminability` flag; reversibility just makes it vivid. The results
 should say so directly.
 
 ### Two smaller defects
@@ -2149,7 +2149,7 @@ The reading that follows from the counts:
     measures recovery of exactly the examples forgotten. Four of five apparently forgotten
     models recover faster than any retrain.
 
-**For the paper:** relearning is the only audit that can see forgetting hidden from accuracy. In
+**For the results:** relearning is the only audit that can see forgetting hidden from accuracy. In
 this study it sees it only where accuracy is near its ceiling, which leaves it little room. The
 protocol explains why. It reintroduces 500 of up to 5000 examples but evaluates all of them, and
 its log-step AUC includes step 0, i.e. the starting accuracy. `relearn_t80` is anchored to 80% of
@@ -2272,7 +2272,7 @@ So, decided on G's distribution before any coefficient was read as a result:
 - **H4's spread is the SD of method means of log G**, which is free of the denominator. η²
   saturates at 0.75–0.99 everywhere and cannot separate conditions.
 
-**Added after seeing the data, so exploratory, and to be labelled so in the paper:** signed G,
+**Added after seeing the data, so exploratory, and to be labelled so in the results:** signed G,
 the share beyond M0, continuous canary validity, RQ4 on the G scale, a McNemar test for H2b, and
 agreement by condition. The registered analyses (§15.2, §15.3, §16.2 models, rank tables) are
 reported as registered, except for the model scale above.
@@ -2533,7 +2533,7 @@ pins it.
 
 ## STAGE 8 COMPLETE (2 Oct 2026)
 
-The final run of notebook 06 used commit `32a8fbb`, and its bundle is the one the paper cites.
+The final run of notebook 06 used commit `32a8fbb`.
 
 **Provenance.**
 - All 17 analysis tables recompute exactly from the bundle's own calibration tables here,
@@ -2829,17 +2829,13 @@ were not exact, and are corrected where they stand or below:
 Its tables were generated from the final bundle's tables, not typed. Its figures are in
 `docs/figures/` (tracked), copied from the local render.
 
-### Open
-
-1. Figure sizes for the paper template, once the venue is known.
-
 ## Master reference v3.0 (19 Oct 2026)
 
 `../ForgetCheck_Master_Project_Reference.docx` is brought up to date with the study as built and
 run; v2.0 is kept as `ForgetCheck_Master_Project_Reference_v2.0.docx`. The research claim, RQs
 and hypotheses are unchanged. Their outcomes are recorded beside them (§8.4), and the timeline
-(§21) is now the as-run dates plus the remaining deadlines. Every change is listed in the
-document's own v3.0 changelog. Numbers in it are quoted from `RESULTS.md`.
+(§21) is now the as-run dates. Every change is listed in the document's own v3.0 changelog.
+Numbers in it are quoted from `RESULTS.md`.
 
 It also repairs v2.0 layout defects:
 - §15.5 and the §21 ownership note sat inside the contents list;
@@ -2847,20 +2843,17 @@ It also repairs v2.0 layout defects:
 - list items had no bullets;
 - the cover title lacked "Audit Validity".
 
-For the mentor:
-- v3.0 is the first time the master document states the as-built departures, all of them
-  decisions recorded here when taken:
-  - the method settings (§12.1);
-  - RBF-CKA as the second representation measure, not a non-CKA one;
-  - activation distance retired;
-  - SDE added.
-- **Ownership, unresolved:** §21 (unchanged since v2.0) gives the dashboard to member D; the
-  implementation plan's week 15–16 row gives it to A. Confirm which.
+v3.0 is the first time the master document states the as-built departures, all of them
+decisions recorded here when taken:
+- the method settings (§12.1);
+- RBF-CKA as the second representation measure, not a non-CKA one;
+- activation distance retired;
+- SDE added.
 
 ## Dashboard built, and two exports for it (28 Oct 2026)
 
 `dashboard/` is a Streamlit app over the result tables: ten pages, including a six-step guided
-tour for the presentation and a calibration lab of what-ifs (band size, band rule, damage
+tour of the findings and a calibration lab of what-ifs (band size, band rule, damage
 threshold, minimum effect). See [`../dashboard/README.md`](../dashboard/README.md). It runs from
 its own committed snapshot, `dashboard/data/` (~2 MB, built by `dashboard/prepare_data.py`),
 because `results/` is gitignored. Every headline is computed from the tables; the landing page's
@@ -2877,9 +2870,9 @@ Two exports were added so the dashboard can show what the records never held:
 
 Found while building it: **only fine-tuning at mem-low (5 models) passes every calibrated primary
 audit**, where only behavior is scored and nothing needs forgetting. Outside the negative control,
-0 of 175 healthy models do. Paper draft 3's abstract says "no method produces a retrain-like
-model under any calibrated audit"; the precise form is "outside the negative control, no
-unlearned model passes every calibrated audit".
+0 of 175 healthy models do. So the precise statement is "outside the negative control, no
+unlearned model passes every calibrated audit", not "no method produces a retrain-like model
+under any calibrated audit".
 
 **29 Oct: both exports are in, and check out.** Notebook 06's re-run reproduced every table of the
 11 Oct bundle unchanged and added `candidates.parquet` (3,743 values: 2,073 retrain, 1,670 M0). The
@@ -2887,8 +2880,7 @@ per-retrain values rebuild every band and every leave-one-out FPR and M0-power c
 recomputes the native rule per retrain and gets the published counts (17/17 at mem-high), now a
 test. Notebook 07's curves (2,624 rows: per condition 30 method, 5 retrain and 5 original curves
 and one random-init) reproduce the Stage 6 AUCs to a median difference of 0.0000 (healthy methods
-≤ 0.001; max 0.021, NegGrad). The paper's abstract, contributions and conclusion now use the
-precise sentence above (docx edited in place; `build/paper_content.py` matches).
+≤ 0.001; max 0.021, NegGrad). RESULTS.md now uses the precise sentence above.
 
 **8 Nov: hosting.** The dashboard goes on Streamlit Community Cloud (free; redeploys on every push
 to `main`). `dashboard/requirements.txt` limits the install to its seven packages; every page was
@@ -2906,6 +2898,20 @@ the repository public and not a fork, and the file on `main` unchanged. A GitHub
 that GitHub registers the schedule again; to check: the 20:17 UTC run appears. `.devcontainer/`
 (added from Streamlit's setup page, for Codespaces) removed: not used, and it installed too little
 to run the dashboard.
+
+**10 Nov: hourly.** Re-enabling registered the schedule, but of the four slots since (20:17, 00:17,
+04:17 and 08:17 UTC) only one ran, at 02:45, and passed. No GitHub incident covers the gaps:
+GitHub's scheduler is best effort and drops runs. The schedule is now hourly (`17 * * * *`), so the
+app sleeps only if twelve runs in a row are dropped.
+
+**12 Nov: the runner's own Chrome.** The four-hourly schedule (still the one on `main`) ran six
+times in two days, 6–10 h apart. One run failed while installing the browser: the
+`playwright install --with-deps` step hung for 10 minutes, with the dashboard up, so the failure
+email was a false alarm. The next run took 75 s to open the dashboard instead of the usual 43, 16 h
+after the last successful visit: the app had gone to sleep and the script woke it, the first real
+test of that path. The workflow now drives the Chrome that GitHub's Ubuntu images already have
+(`BROWSER_CHANNEL=chrome`) and downloads Chromium only as a fallback; checked locally against the
+live app.
 
 ## Outstanding from Stage 5 — one real item (14 Sep 2026)
 
@@ -2981,7 +2987,7 @@ limitation** rather than quietly running the mismatched attack.
 
 ### 4. Nesting on the size axis is now a design commitment
 
-`rand-500 ⊂ rand-2500 ⊂ rand-3000 ⊂ rand-5000` is deliberate and worth stating in the paper: it
+`rand-500 ⊂ rand-2500 ⊂ rand-3000 ⊂ rand-5000` is deliberate and worth stating with the results: it
 means a difference between size conditions is attributable to size rather than to sample
 composition. The cost is that the size conditions are not independent draws, so they cannot be
 treated as independent observations in the statistics. The mixed-effects model must account for
@@ -2991,14 +2997,8 @@ this — do not pool size conditions as if they were separate samples.
 
 ## Next actions
 
-Stages 0–8 are complete (11 Oct 2026). What remains, from master reference v3.0 §21:
-
-1. **Final paper to the mentor — by 29 Oct 2026.**
-2. **Final progress presentation — 31 Oct.**
-3. **Final presentation, with the dashboard demonstration — 5 Nov.** The dashboard is complete
-   (29 Oct): both exports are in; see [`../dashboard/README.md`](../dashboard/README.md) for the
-   demo script.
-4. Figure sizes for the paper template, once the venue is known.
+Nothing is outstanding. Stages 0–8 are complete (11 Oct 2026), the dashboard is built (29 Oct)
+and it is hosted (9 Nov); see [`../dashboard/README.md`](../dashboard/README.md).
 
 **Novelty thread `9IzfArmoHq` — closed, 8 Sep 2026.** It is *Unlearning Evaluation through Subset
 Statistical Independence* (ICLR 2026 = arXiv 2603.00587): a retrain-free HSIC audit that argues

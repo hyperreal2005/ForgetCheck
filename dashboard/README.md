@@ -22,7 +22,7 @@ looks the same whatever the laptop's dark-mode setting.
 | Page | What it shows | What you can change |
 |---|---|---|
 | The study at a glance | Headline numbers (computed live), design, four take-aways | — |
-| Guided tour | Six claims, one interactive chart each — for the presentation | Each step's toggle |
+| Guided tour | Six claims, one interactive chart each, for presenting the findings | Each step's toggle |
 | Model inspector | One unlearned model's report card: every audit against the retrain band | Forget set, method, seed, all metrics |
 | Audit validity | Native rules vs calibrated bands; canary scoring; canary memory by degree | Families, guard on/off, metric |
 | Agreement explorer | Any two audits, model by model, with Kendall τ | Metrics, forget set, pooled vs within, log axes |
@@ -75,8 +75,8 @@ new data snapshot.
   before the root `pyproject.toml`. So it installs only the seven packages the app needs, not the
   pipeline and PyTorch. Keep that file in step with any new import in `dashboard/`.
 - **Sleep.** Community Cloud puts an app to sleep after 12 hours without a viewer, and the next
-  visitor waits about a minute for it. `.github/workflows/keep-awake.yml` prevents this. Every four
-  hours it opens the dashboard in a headless browser, which counts as a viewer, and clicks the
+  visitor waits about a minute for it. `.github/workflows/keep-awake.yml` prevents this. Every hour
+  it opens the dashboard in a headless browser, which counts as a viewer, and clicks the
   wake-up button if it has gone to sleep anyway. A plain HTTP ping would not do: it reaches
   Streamlit's own front page, not the app.
 - **Down alerts.** If the dashboard does not load within seven minutes, the workflow run fails and

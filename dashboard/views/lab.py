@@ -124,7 +124,7 @@ def band_rule():
         st.caption("Widen the band and fewer genuine retrains are flagged, but unlearned models and "
                    "originals slip through too; narrow it and the audit starts accusing retrains. "
                    "The prediction interval at 95.45% is the rule registered for the study. These "
-                   "counts cover the five primary audits only; the paper's pooled rate, over every "
+                   "counts cover the five primary audits only; the study's pooled rate, over every "
                    f"calibrated audit, is {pk} of {pn} ({pk / pn:.1%}).")
     else:
         st.caption("Once the per-retrain values are in (notebook 06 re-run), this panel also "

@@ -49,6 +49,7 @@ forgetcheck_stage8_results*.zip
 forgetcheck_curves*.zip
 !results/**/.gitkeep
 Research Paper Docs/ 
+Other Docs/
 
 # --- editors / OS -----------------------------------------------------------
 .vscode/

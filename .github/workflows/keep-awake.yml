@@ -2,7 +2,7 @@ name: keep dashboard awake
 
 # Streamlit Community Cloud puts the dashboard to sleep after 12 hours without a viewer, and the
 # next visitor then waits about a minute for it to start. This opens it in a headless browser every
-# four hours, which counts as a viewer, and wakes it if it has gone to sleep anyway. A failed run
+# hour, which counts as a viewer, and wakes it if it has gone to sleep anyway. A failed run
 # means the dashboard did not load; GitHub emails whoever last changed this schedule.
 #
 # Off until the repository variable DASHBOARD_URL is set (Settings -> Secrets and variables ->
@@ -13,9 +13,10 @@ name: keep dashboard awake
 
 on:
   schedule:
-    # Every four hours, at 17 minutes past: GitHub delays, and under load drops, runs queued at
-    # the top of the hour. Four hours leaves room for a dropped run inside the 12-hour window.
-    - cron: "17 */4 * * *"
+    # Every hour, at 17 minutes past (GitHub is busiest at the top of the hour). GitHub treats
+    # schedules as best effort: in the first day it ran 1 of 4 four-hourly slots, hours late. Hourly
+    # means the app sleeps only if 12 runs in a row are dropped. Public repositories run it free.
+    - cron: "17 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -30,10 +31,18 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install a headless browser
+      - name: Install Playwright (drives the runner's own Chrome)
+        timeout-minutes: 5
         run: |
           pip install playwright==1.64.1
-          python -m playwright install --with-deps chromium
+          # GitHub's Ubuntu images ship Google Chrome. Downloading Playwright's own Chromium and its
+          # system packages was the slow, failure-prone step (it once hung for 10 minutes and failed,
+          # with the dashboard up), so it is kept only as the fallback for an image without Chrome.
+          if command -v google-chrome >/dev/null; then
+            echo "BROWSER_CHANNEL=chrome" >> "$GITHUB_ENV"
+          else
+            python -m playwright install --with-deps chromium
+          fi
 
       - name: Open the dashboard
         env:

@@ -11,7 +11,7 @@ import data as D
 
 @st.cache_data(show_spinner=False)
 def pooled_calibrated_fpr() -> dict:
-    """The calibrated audits' pooled false-positive rate, split as the paper reports it."""
+    """The calibrated audits' pooled false-positive rate, split as RESULTS.md reports it."""
     v = D.table("validity")
     s = v[(v["calibrated_fpr_n"].fillna(0) > 0) & v["probe_set"].isin(["forget", "layer4"])]
     s = s[~s["retired"].astype(bool)]

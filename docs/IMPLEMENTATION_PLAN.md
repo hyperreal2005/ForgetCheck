@@ -49,8 +49,8 @@ models*, not with the number of methods. So the headroom goes into **depth, not 
 **Total: ~700 runs, ~40–70 GPU-hours.** Comfortably one week of one member's quota.
 
 > **Nothing was ever cut for compute.** v1.0 was 147 runs; v2.0 was 353; v2.1 is ~700. The only
-> removal was the LLM/TOFU extension, cut on scientific grounds — v1.0 already marked it "optional
-> only after the core paper is complete," and it dilutes a paper whose contribution is audit
+> removal was the LLM/TOFU extension, cut on scientific grounds — v1.0 already marked it optional
+> until the core study was complete, and it dilutes a study whose contribution is audit
 > validity in vision.
 
 ---
@@ -161,7 +161,7 @@ built exactly.
 Every audit then produces a verdict on each `canary-500` model, and that verdict is scored against
 this known answer as accuracy / sensitivity / specificity. This is what makes §15.5 possible.
 
-> **Caveat to state in the paper:** canaries are maximally-memorised by construction, so they are
+> **Caveat to state with the results:** canaries are maximally-memorised by construction, so they are
 > an upper bound on detectability, not a typical deletion request. An audit that fails *here* is
 > unusable; an audit that succeeds here is not thereby validated for ordinary forget sets. Report
 > canary results alongside the memorization strata, never instead of them.
@@ -371,7 +371,7 @@ Comfortable against a 200 GB private quota. Two constraints shape the layout:
 **Activations: pool before storing.** Raw `layer1` output for 3000 probes is 64×32×32×3000×4 B ≈
 786 MB per model — untenable. Global-average-pool over spatial dims first: 3000 × (64+128+256+512)
 = 3000 × 960, ≈ 6 MB in fp16. This is standard practice for CKA on convnets and must be applied
-identically to every model. **State the pooling in the paper** — GAP-CKA discards spatial
+identically to every model. **State the pooling with the results** — GAP-CKA discards spatial
 structure, which is an accepted convention but a real limitation.
 
 ---
@@ -449,7 +449,7 @@ the oracle to ≈0, the protocol is wrong, not the finding.
 - Mixed-effects: `metric ~ method + forget_condition + (1 | train_seed)`.
 - Disagreement matrix; per-setting rank tables marked **descriptive**.
 
-> **Gate:** every number in the paper traces to a record shard. No hand-edited values anywhere.
+> **Gate:** every reported number traces to a record shard. No hand-edited values anywhere.
 
 ---
 
@@ -511,7 +511,7 @@ must complete in full to be useful.
 | 11–12 | — | — | relearning + anchors | validity tables |
 | 13 | **full multi-seed matrix** ||||
 | 14 | — | — | — | Stage 8 analysis |
-| 15–16 | dashboard | paper | paper | paper assembly |
+| 15–16 | dashboard | write-up | write-up | write-up assembly |
 
 **A is alone on the critical path until week 7.** If the week-6 pilot slips at all, move B onto the
 substrate immediately — B and C have nothing to audit until checkpoints exist, and that idleness is

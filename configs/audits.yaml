@@ -51,7 +51,7 @@ representation:
   probe_source: mixed        # forget + retain + test in equal parts
   # Activations are global-average-pooled over spatial dims before storage. Raw layer1 output for
   # 3000 probes is ~786 MB per model, which makes ~300 models untenable (plan §5). GAP discards
-  # spatial structure — an accepted convention for CKA on convnets, and a limitation the paper
+  # spatial structure — an accepted convention for CKA on convnets, and a limitation the results
   # must state explicitly.
   pooling: gap
   primary_measure: cka_linear

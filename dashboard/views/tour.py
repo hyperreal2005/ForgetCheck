@@ -1,4 +1,4 @@
-"""Six steps, one claim each, each with its interactive element preset. For the presentation."""
+"""Six steps, one claim each, each with its interactive element preset, for presenting the findings."""
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go

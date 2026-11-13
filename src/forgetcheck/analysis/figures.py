@@ -1,7 +1,7 @@
 """Stage 8's figures, drawn from the calibration and analysis tables alone.
 
 One finding per figure, each traceable to a table (implementation plan §8: no hand-edited
-values). Static, for the paper: PDF for print, PNG for review.
+values). Static: PDF for print, PNG for review.
 
 Visual rules, fixed here so every figure reads as one system: one-hue sequential scale for
 magnitude, blue <-> gray <-> red for polarity (red negative, blue positive -- the pair passes the

@@ -2,7 +2,7 @@
 
 The anchor behaviour is this module's own self-test, and it is tested as such: the `original` arm
 must normalise to ~1 and the `oracle` arm to ~0 *by construction*, so a protocol error shows up
-here rather than as a surprising result in the paper.
+here rather than as a surprising result in the analysis.
 """
 
 import numpy as np

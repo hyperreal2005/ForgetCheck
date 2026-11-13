@@ -15,7 +15,7 @@ Feature taps for the representation audit are the four residual stages. They are
 forward hooks and **global-average-pooled over spatial dimensions before leaving this module** — raw ``layer1`` output for 3000 probes is about
 786 MB per model, which makes storing it for ~300 models untenable (implementation plan §5). GAP
 discards spatial structure; that is the accepted convention for CKA on convnets and a limitation
-the paper must state.
+the results must state.
 """
 
 from __future__ import annotations
